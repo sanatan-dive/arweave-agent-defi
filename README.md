@@ -7,6 +7,8 @@
 
 An autonomous DeFi portfolio manager running natively on AO that automatically rebalances portfolios, optimizes yields, and manages risk across multiple protocols using advanced ML-based algorithms.
 
+---
+
 ## 🌟 Key Features
 
 - **🤖 Autonomous Operation**: Runs 24/7 on AO with cron-based scheduling
@@ -17,11 +19,15 @@ An autonomous DeFi portfolio manager running natively on AO that automatically r
 - **🛡️ Emergency Controls**: Pause/resume functionality with risk thresholds
 - **📈 Performance Tracking**: Comprehensive metrics and historical analysis
 
+---
+
 ## 🚀 Live Deployment
 
 **Agent Process ID**: `3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs`
 
-Monitor live at: https://www.ao.link/#/entity/3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs
+Monitor live at: [AO Explorer](https://www.ao.link/#/entity/3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs)
+
+---
 
 ## 🏗️ Architecture
 
@@ -38,23 +44,26 @@ Monitor live at: https://www.ao.link/#/entity/3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM
 │ (Multi-Protocol │    │ (Smart Trading  │    │ (External       │
 │  Optimization)  │    │  Engine)        │    │  Integrations)  │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         └───────────────────────┼───────────────────────┘
-                                 ▼
-                    ┌─────────────────────────┐
-                    │       config.lua        │
-                    │   (Configuration &      │
-                    │    Real Process IDs)    │
-                    └─────────────────────────┘
+         │
+         ▼
+┌─────────────────────────┐
+│       config.lua        │
+│   (Configuration &      │
+│    Real Process IDs)    │
+└─────────────────────────┘
 ```
+
+---
 
 ## 🔗 Protocol Integrations
 
-| Protocol | Process ID | Purpose |
-|----------|------------|---------|
-| **0rbit Oracle** | `BaMK1dfayo75s3q1ow6AO64UDpD9SEFbeE8xYrY2fyQ` | Real-time price feeds |
-| **Permaswap DEX** | `aGF7BWB_9B924sBXoirHy4KOceoCX72B77yh1nllMPA` | Automated trading |
-| **AstroUSD** | `GcFxqTQnKHcr304qnOcq00ZqbaYGDn4Wbb0DHAM-wvU` | Stable asset management |
+| Protocol         | Process ID                                      | Purpose                   |
+|------------------|------------------------------------------------|---------------------------|
+| **0rbit Oracle** | `BaMK1dfayo75s3q1ow6AO64UDpD9SEFbeE8xYrY2fyQ`  | Real-time price feeds     |
+| **Permaswap DEX**| `aGF7BWB_9B924sBXoirHy4KOceoCX72B77yh1nllMPA`  | Automated trading         |
+| **AstroUSD**     | `GcFxqTQnKHcr304qnOcq00ZqbaYGDn4Wbb0DHAM-wvU`  | Stable asset management   |
+
+---
 
 ## 🚀 Quick Start
 
@@ -88,19 +97,21 @@ aos 3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs
 initialize_agent()
 ```
 
+---
+
 ## 📋 Module Overview
 
 ### Core Modules (2,024 lines of production code)
 
-| Module | Lines | Description |
-|--------|-------|-------------|
-| `agent.lua` | 175 | Main orchestrator with message handlers |
-| `config.lua` | 180 | Configuration with real process IDs |
-| `portfolio.lua` | 187 | Real-time portfolio tracking |
-| `risk.lua` | 309 | ML-based risk assessment |
-| `yield.lua` | 400 | Multi-protocol yield optimization |
-| `rebalance.lua` | 273 | Automated trading engine |
-| `protocols.lua` | 500 | External protocol interfaces |
+| Module           | Lines | Description                           |
+|------------------|-------|---------------------------------------|
+| `agent.lua`      | 175   | Main orchestrator with message handlers|
+| `config.lua`     | 180   | Configuration with real process IDs   |
+| `portfolio.lua`  | 187   | Real-time portfolio tracking          |
+| `risk.lua`       | 309   | ML-based risk assessment              |
+| `yield.lua`      | 400   | Multi-protocol yield optimization     |
+| `rebalance.lua`  | 273   | Automated trading engine              |
+| `protocols.lua`  | 500   | External protocol interfaces          |
 
 ### Key Algorithms
 
@@ -109,6 +120,8 @@ initialize_agent()
 - **Risk Scoring**: Multi-factor protocol assessment
 - **Yield Farming**: Risk-adjusted APY optimization
 - **Rebalancing**: Drift-based automatic rebalancing
+
+---
 
 ## 🎮 Usage Examples
 
@@ -146,6 +159,8 @@ Portfolio.get_allocation_percentages()
 Risk.assess()
 ```
 
+---
+
 ## 🛡️ Security & Risk Management
 
 ### Built-in Safeguards
@@ -165,6 +180,8 @@ emergency_threshold = 0.9,      -- Emergency stop trigger
 var_confidence_level = 0.95,    -- 95% VaR confidence
 ```
 
+---
+
 ## 📊 Performance Metrics
 
 The agent tracks comprehensive performance metrics:
@@ -175,6 +192,8 @@ The agent tracks comprehensive performance metrics:
 - **Yield Performance**: APY tracking across protocols
 - **Rebalancing Activity**: Trade frequency and slippage
 - **Protocol Health**: Risk scores and TVL monitoring
+
+---
 
 ## 🔧 Configuration
 
@@ -197,6 +216,8 @@ price_update_interval = 300,    -- 5 minutes
 yield_scan_interval = 1800,     -- 30 minutes
 health_check_interval = 600     -- 10 minutes
 ```
+
+---
 
 ## 🧪 Testing
 
@@ -221,11 +242,15 @@ test_agent()
 - ✅ Protocol integration and error handling
 - ✅ Emergency procedures and recovery
 
+---
+
 ## 📚 Documentation
 
 - **[Deployment Guide](DEPLOYMENT-STEPS.md)**: Complete deployment instructions
 - **[Technical Writeup](TECHNICAL-WRITEUP.md)**: Comprehensive technical analysis
 - **[Test Suite](test.lua)**: Agent validation and testing
+
+---
 
 ## 🌐 Links & Resources
 
@@ -233,6 +258,8 @@ test_agent()
 - **0rbit Oracle**: https://0rbit.co  
 - **Permaswap DEX**: https://permaswap.network
 - **AstroUSD**: https://www.astrousd.com
+
+---
 
 ## 🤝 Contributing
 
@@ -242,9 +269,13 @@ test_agent()
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
 
 ## 🏆 Hackathon Submission
 
