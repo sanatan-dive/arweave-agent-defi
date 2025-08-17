@@ -3,7 +3,7 @@
 [![AO](https://img.shields.io/badge/Built%20on-AO-blue)](https://ao.arweave.dev)
 [![Lua](https://img.shields.io/badge/Language-Lua-purple)](https://www.lua.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)](https://github.com/your-username/ao-defi-portfolio-agent)
+[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)](https://github.com/sanatan-dive/arweave-agent-defi)
 
 An autonomous DeFi portfolio manager running natively on AO that automatically rebalances portfolios, optimizes yields, and manages risk across multiple protocols using advanced ML-based algorithms.
 
@@ -21,7 +21,7 @@ An autonomous DeFi portfolio manager running natively on AO that automatically r
 
 **Agent Process ID**: `3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs`
 
-Monitor live at: https://ao.arweave.dev/#/process/3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs
+Monitor live at: https://www.ao.link/#/entity/3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs
 
 ## 🏗️ Architecture
 
@@ -65,36 +65,42 @@ Monitor live at: https://ao.arweave.dev/#/process/3cn7HC83zWIzBnnHJlloZaLONq4uer
 npm install -g https://get_ao.g8way.io
 
 # Clone repository
-git clone https://github.com/your-username/ao-defi-portfolio-agent
-cd ao-defi-portfolio-agent
+git clone https://github.com/sanatan-dive/arweave-agent-defi
+cd arweave-agent-defi
 ```
 
 ### Deploy Your Agent
 
 ```bash
-# Deploy to AO mainnet
-./deploy-live.sh
+# Start AOS and deploy modules
+aos 3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs
 
-# Run comprehensive tests
-./test-live.sh
+# In AOS terminal, load all modules:
+.load config.lua
+.load portfolio.lua
+.load risk.lua  
+.load yield.lua
+.load rebalance.lua
+.load protocols.lua
+.load agent.lua
 
-# Monitor real-time performance
-./monitor-live.sh
+# Initialize the agent
+initialize_agent()
 ```
 
 ## 📋 Module Overview
 
-### Core Modules (2,168 lines of production code)
+### Core Modules (2,024 lines of production code)
 
 | Module | Lines | Description |
 |--------|-------|-------------|
-| `agent.lua` | 171 | Main orchestrator with message handlers |
+| `agent.lua` | 175 | Main orchestrator with message handlers |
 | `config.lua` | 180 | Configuration with real process IDs |
-| `portfolio.lua` | 186 | Real-time portfolio tracking |
-| `risk.lua` | 308 | ML-based risk assessment |
-| `yield.lua` | 385 | Multi-protocol yield optimization |
-| `rebalance.lua` | 461 | Automated trading engine |
-| `protocols.lua` | 477 | External protocol interfaces |
+| `portfolio.lua` | 187 | Real-time portfolio tracking |
+| `risk.lua` | 309 | ML-based risk assessment |
+| `yield.lua` | 400 | Multi-protocol yield optimization |
+| `rebalance.lua` | 273 | Automated trading engine |
+| `protocols.lua` | 500 | External protocol interfaces |
 
 ### Key Algorithms
 
@@ -131,14 +137,13 @@ Send({
 ### Monitor Performance
 
 ```bash
-# Real-time dashboard
-./monitor-live.sh
+# Check agent status in AOS
+aos 3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs
 
-# Check specific metrics
-aos 3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs --command 'print_portfolio_metrics()'
-
-# View transaction history
-aos 3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs --command 'print_logs(20)'
+# In AOS terminal:
+print("Agent Status: " .. tostring(agent_state.initialized))
+Portfolio.get_allocation_percentages()
+Risk.assess()
 ```
 
 ## 🛡️ Security & Risk Management
@@ -198,14 +203,12 @@ health_check_interval = 600     -- 10 minutes
 ### Run Test Suite
 
 ```bash
-# Basic functionality tests
-./test.sh basic
+# Load test module in AOS
+aos 3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs
 
-# Comprehensive integration tests  
-./test-live.sh
-
-# Validate configuration
-./validate.sh
+# In AOS terminal:
+.load test.lua
+test_agent()
 ```
 
 ### Test Coverage
@@ -220,10 +223,9 @@ health_check_interval = 600     -- 10 minutes
 
 ## 📚 Documentation
 
-- **[Deployment Guide](README-LIVE.md)**: Complete deployment instructions
-- **[Implementation Status](IMPLEMENTATION-STATUS.md)**: Detailed technical analysis
-- **[Real Values Guide](REAL_VALUES_GUIDE.md)**: Process ID documentation
+- **[Deployment Guide](DEPLOYMENT-STEPS.md)**: Complete deployment instructions
 - **[Technical Writeup](TECHNICAL-WRITEUP.md)**: Comprehensive technical analysis
+- **[Test Suite](test.lua)**: Agent validation and testing
 
 ## 🌐 Links & Resources
 
@@ -255,9 +257,9 @@ This project was built for the AO Hackathon, showcasing:
 
 ## 📞 Support
 
-- **GitHub Issues**: [Submit an issue](https://github.com/your-username/ao-defi-portfolio-agent/issues)
+- **GitHub Issues**: [Submit an issue](https://github.com/sanatan-dive/arweave-agent-defi/issues)
 - **AO Discord**: https://discord.gg/arweave
-- **Documentation**: Check the `docs/` directory
+- **Documentation**: Check the repository files
 
 ---
 
