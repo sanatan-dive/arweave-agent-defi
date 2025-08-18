@@ -129,8 +129,16 @@ function Rebalance.adjust_targets_for_risk(target_allocations, risk_score)
       adjusted.USDA = math.min(0.7, (adjusted.USDA or 0) + risk_adjustment)
     end
     
+    -- Count non-stable assets
+    local non_stable_count = 0
+    for symbol, percentage in pairs(adjusted) do
+      if symbol ~= "stablecoins" and symbol ~= "USDA" then
+        non_stable_count = non_stable_count + 1
+      end
+    end
+    
     -- Proportionally reduce other allocations
-    local reduction_per_asset = risk_adjustment / (table.getn(adjusted) - 1)
+    local reduction_per_asset = risk_adjustment / math.max(1, non_stable_count)
     for symbol, percentage in pairs(adjusted) do
       if symbol ~= "stablecoins" and symbol ~= "USDA" then
         adjusted[symbol] = math.max(0.05, percentage - reduction_per_asset)
@@ -432,7 +440,7 @@ function Rebalance.get_rebalance_report()
     success_rate = successful_trades / math.max(1, #recent_trades),
     total_gas_spent = total_gas_spent,
     average_slippage = average_slippage,
-    pending_trades = table.getn(Rebalance.pending_trades)
+    pending_trades = #Rebalance.pending_trades
   }
 end
 

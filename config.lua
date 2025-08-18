@@ -1,8 +1,40 @@
+-- config.lua
 -- Configuration for AO DeFi Portfolio Manager Agent
+-- Includes real process IDs and sponsor bonus feature settings
+
 config = {
-  -- Core Agent Settings (YOUR REAL AO PROCESS)
-  agent_id = "3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs", -- Your actual AO process ID
   version = "1.0.0",
+  agent_id = "3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs",
+  
+  -- Sponsor Integration Process IDs (REAL MAINNET ADDRESSES)
+  sponsor_integrations = {
+    randao = "SjvsFtgngd6PyOJDzmZ3a4wbkP5LGFGAZ6hqOkYoSPo",      -- RandAO for randomness
+    apus_ai = "mqBYxpDsolZmJyBdTK8TJp_ftOuIUXVYcSQ8MYZdJg0",    -- Apus Network for AI
+    astrousd = "GcFxqTQnKHcr304qnOcq00ZqbaYGDn4Wbb0DHAM-wvU"    -- AstroUSD for stable assets
+  },
+  
+  -- Bonus Features Configuration
+  bonus_features = {
+    randao_enabled = true,
+    apus_ai_enabled = true,
+    astrousd_deep_integration = true,
+    
+    -- RandAO settings
+    randomness_interval = 3600,              -- Request randomness every hour
+    random_rebalance_threshold = 0.1,        -- 10% threshold for random rebalancing
+    mev_protection_enabled = true,           -- Enable MEV-resistant trading
+    
+    -- Apus Network AI settings
+    ai_inference_interval = 1800,            -- AI analysis every 30 minutes
+    ai_confidence_threshold = 0.8,           -- Minimum confidence for AI decisions
+    ai_risk_enhancement = true,              -- Enhanced risk assessment
+    ai_yield_optimization = true,            -- AI-powered yield selection
+    
+    -- AstroUSD integration settings
+    usda_portfolio_percentage = 0.25,        -- 25% USDA allocation target
+    usda_staking_enabled = true,             -- Enable USDA staking
+    cross_chain_bridge_enabled = true       -- Enable cross-chain operations
+  },
   
   -- Oracle Configuration (REAL 0rbit Oracle Process IDs)
   oracle_addresses = {

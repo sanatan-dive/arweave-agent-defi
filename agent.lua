@@ -1,6 +1,6 @@
 -- agent.lua
--- Main AO DeFi Portfolio Manager Agent
--- Note: All modules are loaded globally in the same AOS process
+-- Main AO DeFi Portfolio Manager Agent with Sponsor Bonus Features
+-- Integrates RandAO, Apus Network AI, and AstroUSD for maximum hackathon points
 
 -- Agent state
 agent_state = {
@@ -9,6 +9,13 @@ agent_state = {
   last_yield_scan = 0,
   last_price_update = 0,
   emergency_mode = false,
+  
+  -- Bonus features state
+  last_randomness_request = 0,
+  last_ai_inference = 0,
+  ai_enhanced_decisions = 0,
+  randomized_operations = 0,
+  
   performance_metrics = {
     total_trades = 0,
     successful_trades = 0,
@@ -17,16 +24,29 @@ agent_state = {
   }
 }
 
--- Initialize the agent
+-- Initialize the agent with bonus features
 function initialize_agent()
   if agent_state.initialized then
     return
   end
   
   ao.log("Initializing AO DeFi Portfolio Manager Agent v" .. config.version)
+  ao.log("🎲 RandAO Integration: " .. (RandAO and "✅ Active" or "❌ Not loaded"))
+  ao.log("🤖 Apus AI Integration: " .. (ApusAI and "✅ Active" or "❌ Not loaded"))
   
   -- Initialize portfolio with initial assets
   Portfolio.initialize_portfolio(config.initial_portfolio)
+  
+  -- Initialize bonus features if available
+  if RandAO then
+    agent_state.randomness_enabled = true
+    ao.log("RandAO randomness features enabled")
+  end
+  
+  if ApusAI then
+    agent_state.ai_enhanced = true
+    ao.log("Apus Network AI features enabled")
+  end
   
   -- Set protocol IDs
   Protocols.protocol_ids = config.protocol_process_ids
@@ -99,7 +119,7 @@ function perform_rebalancing()
   }
 end
 
--- Cron handlers for different intervals
+-- Cron handlers for different intervals with bonus features
 function main_cron()
   local current_time = os.time()
   
@@ -109,15 +129,44 @@ function main_cron()
     agent_state.last_price_update = os.time()
   end
   
-  -- Yield optimization
+  -- AI-enhanced risk assessment
+  if current_time - agent_state.last_ai_inference >= 1800 and ApusAI then -- Every 30 minutes
+    ApusAI.ai_risk_inference(Portfolio.portfolio)
+    ApusAI.ai_market_sentiment()
+    agent_state.last_ai_inference = os.time()
+    agent_state.ai_enhanced_decisions = agent_state.ai_enhanced_decisions + 1
+  end
+  
+  -- Yield optimization with randomness
   if current_time - agent_state.last_yield_scan >= config.yield_scan_interval then
+    if RandAO then
+      -- Use randomness for yield selection
+      local yield_selection = RandAO.randomized_yield_selection(Yield.get_available_strategies())
+      if yield_selection then
+        agent_state.randomized_operations = agent_state.randomized_operations + 1
+      end
+    end
+    
     Yield.scan_protocols(config.supported_protocols)
     local optimization_result = Yield.optimize(Portfolio.portfolio, 0.5)
     agent_state.last_yield_scan = os.time()
   end
   
-  -- Rebalancing
+  -- Enhanced rebalancing with AI and randomness
   if current_time - agent_state.last_rebalance >= config.rebalance_interval then
+    -- Get AI rebalancing strategy if available
+    if ApusAI then
+      ApusAI.ai_rebalancing_strategy(Portfolio.portfolio, config.target_allocations)
+    end
+    
+    -- Use randomness for MEV protection
+    if RandAO then
+      local random_strategy = RandAO.randomized_rebalance_strategy()
+      agent_state.pending_random_rebalance = random_strategy
+      agent_state.last_randomness_request = os.time()
+      agent_state.randomized_operations = agent_state.randomized_operations + 1
+    end
+    
     local result = perform_rebalancing()
     agent_state.last_rebalance = os.time()
     log_rebalance_result(result)

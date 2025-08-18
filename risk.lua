@@ -107,8 +107,14 @@ function Risk.calculate_concentration_risk(portfolio)
     concentration_risk = concentration_risk + 0.5
   end
   
+  -- Count asset values
+  local asset_count = 0
+  for _ in pairs(asset_values) do
+    asset_count = asset_count + 1
+  end
+  
   -- Add Herfindahl-based risk (higher concentration = higher risk)
-  concentration_risk = concentration_risk + (herfindahl - (1 / table.getn(asset_values))) * 2
+  concentration_risk = concentration_risk + (herfindahl - (1 / math.max(1, asset_count))) * 2
   
   return math.min(1, concentration_risk)
 end
@@ -293,9 +299,16 @@ end
 
 function Risk.extract_features(portfolio, market_data)
   -- Extract features for ML model
+  
+  -- Count portfolio assets
+  local asset_count = 0
+  for _ in pairs(portfolio.assets or {}) do
+    asset_count = asset_count + 1
+  end
+  
   local features = {
     portfolio_size = portfolio.metrics.total_value or 0,
-    diversification = table.getn(portfolio.assets or {}),
+    diversification = asset_count,
     volatility = portfolio.metrics.volatility or 0,
     returns = portfolio.metrics.returns or 0,
     market_volatility = market_data.volatility or 0,

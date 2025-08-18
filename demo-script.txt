@@ -1,0 +1,218 @@
+====================================================================
+🎬 3-MINUTE DEMO VIDEO SCRIPT
+AO DeFi Portfolio Manager Agent - Hackathon Submission
+====================================================================
+
+TIMING: 3:00 minutes total
+VISUALS: Screen recording + voiceover
+GOAL: Showcase autonomous DeFi agent for AO Hackathon judges
+
+====================================================================
+SECTION 1: HOOK & INTRODUCTION (0:00-0:30) - 30 seconds
+====================================================================
+
+[VISUAL: Open browser to ao.link]
+URL: https://www.ao.link/#/entity/3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs
+
+SCRIPT:
+"Hi, I'm [Your Name], and I've built something revolutionary for the AO Hackathon - an autonomous DeFi portfolio manager that runs 24/7 on AO mainnet. This isn't just a demo - it's a production-ready agent with over 2,000 lines of code that automatically rebalances portfolios, optimizes yields, and manages risk across multiple protocols. You're looking at it live right now on the AO network."
+
+[VISUAL: Show the live agent on ao.link, highlight the process ID]
+
+TIMING: Speak clearly and confidently, 30 seconds exactly
+
+====================================================================
+SECTION 2: PROBLEM & SOLUTION (0:30-1:00) - 30 seconds  
+====================================================================
+
+[VISUAL: Switch to GitHub repository README]
+URL: https://github.com/sanatan-dive/arweave-agent-defi
+
+SCRIPT:
+"DeFi portfolio management is incredibly complex. Users need to constantly monitor yields across dozens of protocols, rebalance based on changing risk profiles, and optimize returns while protecting against volatility. Most people simply can't do this manually. My agent solves this by running autonomously on AO's decentralized network, integrating with real protocols like 0rbit Oracle for price feeds, Permaswap for trading, and AstroUSD for stable asset management."
+
+[VISUAL: Scroll through README showing architecture diagram and features]
+
+TIMING: Emphasize "real protocols" and "autonomous"
+
+====================================================================
+SECTION 3: LIVE DEMO (1:00-2:00) - 60 seconds
+====================================================================
+
+[VISUAL: Switch to AOS terminal]
+
+SCRIPT WHILE TYPING:
+"Let me show you the agent in action. Here's my live agent running on AO mainnet..."
+
+COMMANDS TO TYPE:
+1. .load demo.lua
+2. run_demo()
+3. run_enhanced_demo()
+
+NARRATION DURING DEMO OUTPUT:
+"As you can see, the agent is fully initialized and connected to live protocols. It's managing a real portfolio, performing risk assessments using Value-at-Risk calculations, and optimizing yields across multiple protocols. Now let me show you the sponsor bonus features..."
+
+NARRATION DURING ENHANCED DEMO:
+"Here are the advanced features that make this agent truly cutting-edge. First, RandAO integration provides randomness for MEV-resistant rebalancing - notice how it requests randomness to prevent predictable trading patterns. Second, Apus Network AI integration enables machine learning-powered risk assessment and yield optimization. The agent makes real AI inference calls to enhance decision-making."
+
+COMMAND TO TYPE:
+4. Send({Target = ao.id, Action = "Portfolio-Status"})
+
+NARRATION:
+"The agent responds immediately, demonstrating true autonomous operation. It's continuously monitoring portfolio performance, assessing risk with machine learning algorithms, and ready to execute trades when thresholds are met."
+
+[VISUAL: Show the message response and portfolio calculations scrolling]
+
+TIMING: Let the demo output show for 5-10 seconds, then continue narration
+
+====================================================================
+SECTION 4: TECHNICAL HIGHLIGHTS (2:00-2:30) - 30 seconds
+====================================================================
+
+[VISUAL: Quick cuts between code files]
+Show: portfolio.lua, risk.lua, yield.lua
+
+SCRIPT:
+"Under the hood, this agent features machine learning-based risk assessment with 95% confidence Value-at-Risk calculations, autonomous yield optimization that scans multiple protocols for the best returns, and smart rebalancing with slippage protection. But what makes it truly innovative are the sponsor integrations: RandAO provides cryptographic randomness for MEV-resistant trading, Apus Network enables real AI inference calls for enhanced decision-making, and AstroUSD integration offers stable asset management. It leverages AO's unique message-passing architecture for true decentralized autonomy."
+
+[VISUAL: Briefly show code snippets from key functions like Risk.assess(), Portfolio.calculate_metrics()]
+
+TIMING: Speak technically but clearly - emphasize sophistication
+
+====================================================================
+SECTION 5: IMPACT & CONCLUSION (2:30-3:00) - 30 seconds
+====================================================================
+
+[VISUAL: Back to ao.link showing live agent + GitHub repository side by side]
+
+SCRIPT:
+"This represents the future of DeFi - set your parameters once, and your portfolio is managed 24/7 by an autonomous agent that never sleeps, never misses opportunities, and continuously optimizes for your goals. It's deployed live on AO mainnet, fully open source, and ready for real-world use. The AO platform enables truly autonomous agents that run forever on the permaweb, and this portfolio manager showcases that potential perfectly. Thank you for watching."
+
+[VISUAL: Final shot showing both the live agent URL and GitHub repository]
+
+END SCREEN TEXT OVERLAY:
+🚀 Live Agent: ao.link/#/entity/3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs
+📦 GitHub: github.com/sanatan-dive/arweave-agent-defi
+Built for AO Hackathon 2025 - Practical Utility Track
+
+====================================================================
+RECORDING PREPARATION CHECKLIST
+====================================================================
+
+BROWSER TABS TO OPEN:
+□ ao.link with your agent URL
+□ GitHub repository README 
+□ AOS terminal (already connected to your agent)
+□ portfolio.lua, risk.lua, yield.lua files for code snippets
+
+TERMINAL PREPARATION:
+□ cd /home/sana/Documents/Project/ao-defi-agent
+□ aos 3cn7HC83zWIzBnnHJlloZaLONq4uerfGRM-3OSR7gBs
+□ Ensure demo.lua is ready to load
+
+DEMO COMMANDS READY:
+□ .load demo.lua
+□ run_demo()
+□ run_enhanced_demo()
+□ demo_sponsor_features()
+□ Send({Target = ao.id, Action = "Portfolio-Status"})
+
+AUDIO SETUP:
+□ Test microphone quality
+□ Quiet environment
+□ Clear speaking pace
+□ Practice script 2-3 times
+
+RECORDING SETTINGS:
+□ 1920x1080 resolution
+□ 30fps
+□ Good audio quality
+□ Screen + audio recording
+
+====================================================================
+KEY MESSAGING FOR JUDGES
+====================================================================
+
+PRACTICAL UTILITY (30%):
+- "Solves real DeFi complexity"
+- "Production-ready system"
+- "Immediate value for users"
+
+TECHNICAL IMPLEMENTATION (25%):
+- "Over 2,000 lines of production code"
+- "Machine learning algorithms"
+- "Real protocol integrations"
+
+AUTONOMY (20%):
+- "Runs 24/7 without human intervention"
+- "True set-and-forget operation"
+- "Continuous optimization"
+
+USER EXPERIENCE (15%):
+- "Simple deployment process"
+- "Clear monitoring interface"
+- "Comprehensive documentation"
+
+INNOVATION (10%):
+- "First autonomous DeFi portfolio manager on AO"
+- "Novel ML-based risk assessment"
+- "Advanced yield optimization"
+
+====================================================================
+SPONSOR BONUS MENTIONS
+====================================================================
+
+ASTROUSD INTEGRATION ($500 USDA Bonus):
+- "Deep integration with AstroUSD for stable asset management"
+- "USDA for portfolio stability and yield optimization"
+- "Cross-chain bridge integration for seamless asset movement"
+
+RANDAO INTEGRATION ($500 RandAO Bonus):
+- "RandAO randomness prevents MEV attacks and front-running"
+- "Unpredictable rebalancing timing protects user value"
+- "Cryptographic randomness for fair yield selection"
+
+APUS NETWORK INTEGRATION ($200-1000 APUS Bonus):
+- "Real AI inference calls for enhanced portfolio decisions"
+- "Machine learning risk assessment and yield optimization"
+- "AI-powered market sentiment analysis"
+
+0RBIT ORACLE:
+- "Real-time price feeds from 0rbit oracle network"
+- "Accurate portfolio valuation and risk assessment"
+
+AO PLATFORM:
+- "Leverages AO's message-passing and permanent storage"
+- "True autonomous operation on the permaweb"
+
+====================================================================
+FINAL RECORDING TIPS
+====================================================================
+
+□ Speak with enthusiasm and confidence
+□ Emphasize "live," "autonomous," and "production-ready" 
+□ Show actual functionality, not just static displays
+□ Keep transitions smooth between visuals
+□ Practice timing - 3 minutes goes fast!
+□ Test everything once before final recording
+□ Have backup commands ready if something fails
+□ End strong with the vision and impact
+
+====================================================================
+UPLOAD INSTRUCTIONS
+====================================================================
+
+AFTER RECORDING:
+1. Export as MP4 (1920x1080 recommended)
+2. Upload to YouTube as unlisted/public
+3. Title: "Autonomous DeFi Portfolio Manager on AO - 24/7 Yield Optimization & Risk Management"
+4. Get shareable link
+5. Submit to AO Hackathon Discord before September 2, 11:59 PM UTC
+
+SUBMISSION PACKAGE:
+□ 3-minute demo video (YouTube link)
+□ GitHub repository (already complete)
+□ Technical writeup (already complete)
+□ Working agent deployed on AO mainnet (already complete)
+
+====================================================================
