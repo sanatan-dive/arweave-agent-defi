@@ -1,223 +1,137 @@
--- agent.lua
--- Main AO DeFi Portfolio Manager Agent with Sponsor Bonus Features
--- Integrates RandAO, Apus Network AI, and AstroUSD for maximum hackathon points
+-- AO DeFi Portfolio Manager Agent (Main Process)
+local config = require("config")
 
--- Agent state
-agent_state = {
-  initialized = false,
-  last_rebalance = 0,
-  last_yield_scan = 0,
-  last_price_update = 0,
-  emergency_mode = false,
-  
-  -- Bonus features state
-  last_randomness_request = 0,
-  last_ai_inference = 0,
-  ai_enhanced_decisions = 0,
-  randomized_operations = 0,
-  
-  performance_metrics = {
-    total_trades = 0,
-    successful_trades = 0,
-    total_return = 0,
-    max_drawdown = 0
-  }
-}
-
--- Initialize the agent with bonus features
-function initialize_agent()
-  if agent_state.initialized then
-    return
-  end
-  
-  ao.log("Initializing AO DeFi Portfolio Manager Agent v" .. config.version)
-  ao.log("🎲 RandAO Integration: " .. (RandAO and "✅ Active" or "❌ Not loaded"))
-  ao.log("🤖 Apus AI Integration: " .. (ApusAI and "✅ Active" or "❌ Not loaded"))
-  
-  -- Initialize portfolio with initial assets
-  Portfolio.initialize_portfolio(config.initial_portfolio)
-  
-  -- Initialize bonus features if available
-  if RandAO then
-    agent_state.randomness_enabled = true
-    ao.log("RandAO randomness features enabled")
-  end
-  
-  if ApusAI then
-    agent_state.ai_enhanced = true
-    ao.log("Apus Network AI features enabled")
-  end
-  
-  -- Set protocol IDs
-  Protocols.protocol_ids = config.protocol_process_ids
-  
-  -- Log initialization
-  ao.log("Agent initialized with portfolio value: $" .. Portfolio.calculate_total_value())
-  
-  agent_state.initialized = true
-  agent_state.last_rebalance = os.time()
-  agent_state.last_yield_scan = os.time()
-  agent_state.last_price_update = os.time()
-end
-
--- Main message handler
+-- Message handler for incoming data (e.g., price updates, portfolio changes)
 function handle_message(msg)
-  if not agent_state.initialized then
-    initialize_agent()
-  end
-  
-  local action = msg.Action or msg.action or ""
-  
-  -- Handle different message types
-  if action == "Price-Response" or action == "price_update" then
-    handle_price_update(msg)
-  elseif action == "Rebalance" or action == "rebalance" then
-    trigger_rebalance()
-  elseif action == "Emergency-Stop" then
-    handle_emergency_stop()
-  elseif action == "Get-Status" then
-    send_status_response(msg.From)
-  elseif action == "Update-Config" then
-    handle_config_update(msg)
-  elseif action == "Manual-Trade" then
-    handle_manual_trade(msg)
-  elseif Protocols.handle_protocol_response(msg) then
-    -- Protocol response handled
-  else
-    ao.log("Unknown message action: " .. action)
-  end
-end
-
-function perform_rebalancing()
-  -- Calculate portfolio metrics
-  local metrics = Portfolio.calculate_metrics()
-  
-  -- Assess risk
-  local risk_result = Risk.assess(Portfolio.portfolio)
-  
-  -- Determine target allocations based on risk
-  local target_allocations = config.target_allocations
-  if risk_result.risk_score > config.emergency_threshold then
-    target_allocations = config.emergency_allocations
-    agent_state.emergency_mode = true
-  else
-    agent_state.emergency_mode = false
-  end
-  
-  -- Execute rebalancing
-  local rebalance_result = Rebalance.rebalance(
-    Portfolio.portfolio, 
-    risk_result.risk_score, 
-    target_allocations
-  )
-  
-  return {
-    metrics = metrics,
-    risk = risk_result,
-    rebalance = rebalance_result,
-    timestamp = os.time()
-  }
-end
-
--- Cron handlers for different intervals with bonus features
-function main_cron()
-  local current_time = os.time()
-  
-  -- Price updates
-  if current_time - agent_state.last_price_update >= config.price_update_interval then
-    Portfolio.update_prices_from_oracles(config.oracle_addresses)
-    agent_state.last_price_update = os.time()
-  end
-  
-  -- AI-enhanced risk assessment
-  if current_time - agent_state.last_ai_inference >= 1800 and ApusAI then -- Every 30 minutes
-    ApusAI.ai_risk_inference(Portfolio.portfolio)
-    ApusAI.ai_market_sentiment()
-    agent_state.last_ai_inference = os.time()
-    agent_state.ai_enhanced_decisions = agent_state.ai_enhanced_decisions + 1
-  end
-  
-  -- Yield optimization with randomness
-  if current_time - agent_state.last_yield_scan >= config.yield_scan_interval then
-    if RandAO then
-      -- Use randomness for yield selection
-      local yield_selection = RandAO.randomized_yield_selection(Yield.get_available_strategies())
-      if yield_selection then
-        agent_state.randomized_operations = agent_state.randomized_operations + 1
-      end
+    -- ...existing code...
+    if msg.type == "price_update" then
+        -- Update internal price data
+    elseif msg.type == "portfolio_update" then
+        -- Update portfolio composition
+    elseif msg.type == "trade_action" then
+        -- Execute trade
     end
-    
-    Yield.scan_protocols(config.supported_protocols)
-    local optimization_result = Yield.optimize(Portfolio.portfolio, 0.5)
-    agent_state.last_yield_scan = os.time()
-  end
-  
-  -- Enhanced rebalancing with AI and randomness
-  if current_time - agent_state.last_rebalance >= config.rebalance_interval then
-    -- Get AI rebalancing strategy if available
-    if ApusAI then
-      ApusAI.ai_rebalancing_strategy(Portfolio.portfolio, config.target_allocations)
+end
+
+-- Cron handler for periodic tasks (risk assessment, rebalancing)
+function cron()
+    -- ...existing code...
+    assess_risk()
+    rebalance_portfolio()
+    optimize_yields()
+    log_status()
+end
+
+-- Risk assessment (stub)
+function assess_risk()
+    -- Integrate aolearn ML models for VaR and risk scoring
+    local aolearn = require("aolearn")
+    local portfolio_data = {
+        assets = {/* fill with current portfolio assets */},
+        returns = {/* fill with historical returns */}
+    }
+    -- Example: Create VaR model
+    local riskModel = aolearn.risk.new({ model_type = "var", confidence_level = 0.95, lookback_period = 30 })
+    local riskScore = riskModel:calculate(portfolio_data)
+    -- Protocol scoring (multi-factor, weighted)
+    local protocol_scores = {
+        Permaswap = 0.8, -- e.g., based on TVL, audits, community
+        AstroUSD = 0.9
+        -- Add more protocols as needed
+    }
+    -- Store or act on riskScore and protocol_scores
+    ao.send({
+        Target = "risk_log_process_id", -- replace with actual process ID
+        Action = "log-risk",
+        Data = { riskScore = riskScore, protocol_scores = protocol_scores }
+    })
+end
+
+-- Portfolio rebalancing (stub)
+function rebalance_portfolio()
+    -- Abstracted comparison of current vs. target allocations
+    local current_allocations = {
+        stablecoins = 950,
+        bluechip = 2100,
+        defi = 800,
+        yield = 250
+    }
+    local total = 0
+    for _, v in pairs(current_allocations) do total = total + v end
+    local drift = {}
+    for asset, target_pct in pairs(config.target_allocations) do
+        local current_pct = (current_allocations[asset] or 0) / total
+        drift[asset] = current_pct - target_pct
     end
-    
-    -- Use randomness for MEV protection
-    if RandAO then
-      local random_strategy = RandAO.randomized_rebalance_strategy()
-      agent_state.pending_random_rebalance = random_strategy
-      agent_state.last_randomness_request = os.time()
-      agent_state.randomized_operations = agent_state.randomized_operations + 1
+    -- Batch rebalances if drift exceeds threshold (e.g., 5%)
+    local threshold = 0.05
+    local batch = {}
+    for asset, d in pairs(drift) do
+        if math.abs(d) > threshold then
+            table.insert(batch, { asset = asset, amount = math.floor((target_pct - current_pct) * total) })
+        end
     end
-    
-    local result = perform_rebalancing()
-    agent_state.last_rebalance = os.time()
-    log_rebalance_result(result)
-  end
-  
-  -- Health checks and cleanup
-  Protocols.cleanup_old_requests()
+    if #batch > 0 then
+        for _, rebalance in ipairs(batch) do
+            ao.send({
+                Target = "rebalance_protocol_id", -- replace with actual protocol/process ID
+                Action = "rebalance",
+                Data = { asset = rebalance.asset, amount = rebalance.amount }
+            })
+            ao.log("Rebalanced " .. rebalance.asset .. " by " .. rebalance.amount)
+        end
+    else
+        ao.log("No rebalancing needed. Portfolio within thresholds.")
+    end
 end
 
-function log_rebalance_result(result)
-  ao.log("Rebalancing completed - Action: " .. (result.action or "unknown"))
-  
-  if result.trades then
-    ao.log("Trades executed: " .. #result.trades)
-  end
-  
-  -- Store in permanent storage
-  ao.data.append("rebalance-history", {
-    timestamp = os.time(),
-    result = result,
-    portfolio_value = Portfolio.calculate_total_value()
-  })
+-- Yield optimization (stub)
+function optimize_yields()
+    -- Query Permaswap pools for APY/yields using AO message-passing
+    local pool_ids = {
+        "QvpGcggxE1EH0xUzL5IEFjkQd1Hdp1FrehGKIiyLczk", -- Example AO/wAR pool
+        "-SFWHD17LTZR12vI792gUvsM40eioWSIZ1MFvyPA3zE"   -- Example DUMDUM/wAR pool
+    }
+    local yields = {}
+    for _, pool_id in ipairs(pool_ids) do
+        ao.send({
+            Target = pool_id,
+            Action = "get-yields",
+            Data = { pools = { pool_id } }
+        })
+        -- Mock response: yields[pool_id] = { apy = 5.2, risk = 0.8 }
+        yields[pool_id] = { apy = math.random(3, 8), risk = math.random() } -- Replace with real response handling
+    end
+    -- Sort pools by risk-adjusted yield (apy * (1 - risk))
+    local sorted_pools = {}
+    for id, info in pairs(yields) do
+        info.adjusted = info.apy * (1 - info.risk)
+        table.insert(sorted_pools, { id = id, adjusted = info.adjusted })
+    end
+    table.sort(sorted_pools, function(a, b) return a.adjusted > b.adjusted end)
+    -- Allocate assets to top pool(s)
+    local top_pool = sorted_pools[1]
+    if top_pool then
+        ao.send({
+            Target = top_pool.id,
+            Action = "allocate-farming",
+            Data = { amount = 100 } -- Example allocation, replace with real logic
+        })
+    end
 end
 
--- Data storage and logging
-function log_action(action)
-  ao.data.append("portfolio-history", action)
+-- Logging (stub)
+function log_status()
+    if config.audit_log_enabled then
+        -- Store metrics and actions in AO permanent storage
+    end
 end
 
--- AO process handlers setup
-Handlers.add(
-  "MessageHandler",
-  Handlers.utils.hasMatchingTag("Action", "."),
-  handle_message
-)
-
-Handlers.add(
-  "CronHandler", 
-  Handlers.utils.hasMatchingTag("Action", "Cron"),
-  main_cron
-)
-
--- Global function for manual initialization
-function init_agent()
-  initialize_agent()
-  print("✅ Agent initialized successfully!")
-  print("Agent ID: " .. config.agent_id)
-  print("Agent Active: " .. tostring(agent_state.active))
+-- Entry point for AO process
+function main()
+    -- Register message and cron handlers
+    ao.on_message(handle_message)
+    ao.on_cron(cron, config.rebalance_interval)
 end
 
--- Initialize agent on startup
-initialize_agent()
-
-ao.log("AO DeFi Portfolio Manager Agent started successfully")
+main()
